@@ -74,11 +74,11 @@ class Gui {
 	
 	private static Boolean verificarLotacao(JFrame frame){
 		if (data.salasEvento.isEmpty()) {
-			JOptionPane.showMessageDialog(frame, "N„o h· sala de evento cadastrada. \n Por favor, cadastre antes de novos usu·rios.");
+			JOptionPane.showMessageDialog(frame, "N√£o h√° sala de evento cadastrada. \n Por favor, cadastre antes de novos usu√°rios.");
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			return false;
 		}else if (data.salasCafe.isEmpty()) {
-			JOptionPane.showMessageDialog(frame, "N„o h· sala de cafÈ cadastrada. \n Por favor, cadastre antes de novos usu·rios.");
+			JOptionPane.showMessageDialog(frame, "N√£o h√° sala de caf√© cadastrada. \n Por favor, cadastre antes de novos usu√°rios.");
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			return false;
 		}
@@ -91,7 +91,7 @@ class Gui {
 			}
 		}
 		if (!flag) {
-			JOptionPane.showMessageDialog(frame, "Todas as salas de evento est„o lotadas!");
+			JOptionPane.showMessageDialog(frame, "Todas as salas de evento est√£o lotadas!");
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			return false;
 		}
@@ -104,7 +104,7 @@ class Gui {
 			}
 		}
 		if (!flag) {
-			JOptionPane.showMessageDialog(frame, "Todas as salas de cafe est„o lotadas!");
+			JOptionPane.showMessageDialog(frame, "Todas as salas de cafe est√£o lotadas!");
 			frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
 			return false;
 		}
@@ -141,7 +141,7 @@ class Gui {
 			public void actionPerformed(ActionEvent e) {
 				if (!verificarLotacao(pessoaCadastro)) return;
 				if (tf.getText().isEmpty() || tf2.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(pessoaCadastro, "Erro: Campos nome e sobrenome s„o obrigatÛrios.");
+					JOptionPane.showMessageDialog(pessoaCadastro, "Erro: Campos nome e sobrenome s√£o obrigat√≥rios.");
 				}else {				
 					Pessoa pessoa = new Pessoa(tf.getText(), tf2.getText());
 					
@@ -159,7 +159,7 @@ class Gui {
 						}
 					}
 					
-					if (salaMaiorSize - salaMenorSize == 1 && salaMenor.getPessoas().size() == salaMenorSize) {
+					if (salaMaiorSize - salaMenorSize <= 1 && salaMenor.getPessoas().size() == salaMenorSize) {
 						salaMenor.getPessoas().add(pessoa);
 						
 						Sala salaMenorCafe = data.salasCafe.get(0);
@@ -175,7 +175,7 @@ class Gui {
 						JOptionPane.showMessageDialog(pessoaCadastro, "Pessoa cadastrada com sucesso!");
 						saveData(pessoaCadastro);	
 					} else{
-						JOptionPane.showMessageDialog(pessoaCadastro, "N„o pode-se cadastrar novas pessoas para que n„o se tenham salas com lotaÁıes muito diferentes.");
+						JOptionPane.showMessageDialog(pessoaCadastro, "N√£o pode-se cadastrar novas pessoas para que n√£o se tenham salas com lota√ß√µes muito diferentes.");
 						pessoaCadastro.dispatchEvent(new WindowEvent(pessoaCadastro, WindowEvent.WINDOW_CLOSING));
 						return;
 					}
@@ -217,7 +217,7 @@ class Gui {
 	    
 	    
 	    JPanel panel2 = new JPanel();
-	    JLabel label2 = new JLabel("LotaÁ„o");
+	    JLabel label2 = new JLabel("Lota√ß√£o");
 	    JTextField tf2 = new JTextField(6);
 	    panel2.add(label2); 
 	    panel2.add(tf2);
@@ -229,7 +229,7 @@ class Gui {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (tf.getText().isEmpty() || tf2.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(salaCadastro, "Erro: Campos nome e lotaÁ„o s„o obrigatÛrios.");
+					JOptionPane.showMessageDialog(salaCadastro, "Erro: Campos nome e lota√ß√£o s√£o obrigat√≥rios.");
 				}else {
 					Sala sala;
 					try {
@@ -241,7 +241,7 @@ class Gui {
 							data.salasEvento.add(sala);
 						}
 					} catch (Exception ee) {
-						JOptionPane.showMessageDialog(salaCadastro, "Campo LotaÁ„o deve ser um valor numÈrico inteiro.");
+						JOptionPane.showMessageDialog(salaCadastro, "Campo Lota√ß√£o deve ser um valor num√©rico inteiro.");
 					}
 					JOptionPane.showMessageDialog(salaCadastro, "Sala cadastrada com sucesso!");
 					saveData(salaCadastro);
@@ -264,7 +264,7 @@ class Gui {
 	    salaCadastro.getContentPane().add(BorderLayout.SOUTH, buttonsPanel);
 	    
 	    if (isCoffe && data.salasCafe.size() > 1){
-	    	JOptionPane.showMessageDialog(salaCadastro, "Limite m·ximo de duas salas de cafÈ.");
+	    	JOptionPane.showMessageDialog(salaCadastro, "Limite m√°ximo de duas salas de caf√©.");
 	    	salaCadastro.dispatchEvent(new WindowEvent(salaCadastro, WindowEvent.WINDOW_CLOSING));
 			return;
 	    }
@@ -283,7 +283,7 @@ class Gui {
         JPanel gridView = new JPanel(new GridLayout(0, 1, 10, 20));
         
         for (Sala sala : ((isCoffe) ? data.salasCafe : data.salasEvento)) {
-            JLabel label = new JLabel(sala.toString()+" - "+"LotaÁ„o M·xima/LotaÁ„o = "+sala.getLotation()+"/"+sala.getPessoas().size());
+            JLabel label = new JLabel(sala.toString()+" - "+"Lota√ß√£o M√°xima/Lota√ß√£o = "+sala.getLotation()+"/"+sala.getPessoas().size());
             gridView.add(label);
             
             if (isCoffe){
@@ -348,7 +348,7 @@ class Gui {
         		}
 			}
         	if (salaEvento1 == null) {
-        		JOptionPane.showMessageDialog(pessoaConsulta, "N„o h· sala de evento cadastrada para o usu·rio "+data.pessoas.get(i).toString()+".");
+        		JOptionPane.showMessageDialog(pessoaConsulta, "N√£o h√° sala de evento cadastrada para o usu√°rio "+data.pessoas.get(i).toString()+".");
     			pessoaConsulta.dispatchEvent(new WindowEvent(pessoaConsulta, WindowEvent.WINDOW_CLOSING));
     			return;
         	}
@@ -400,7 +400,7 @@ class Gui {
 		        salaCadastroGUI(false);
 			}
 		});
-        JMenuItem m13 = new JMenuItem("Cadastro de espaÁo de cafÈ");
+        JMenuItem m13 = new JMenuItem("Cadastro de espa√ßo de caf√©");
         m13.addActionListener(new ActionListener() {
 			
 			@Override
@@ -428,7 +428,7 @@ class Gui {
 				salaConsultaGUI(false);
 			}
 		});
-        JMenuItem m23 = new JMenuItem("Consulta de espaÁo de cafÈ");
+        JMenuItem m23 = new JMenuItem("Consulta de espa√ßo de caf√©");
     	m23.addActionListener(new ActionListener() {
 			
 			@Override
@@ -446,7 +446,7 @@ class Gui {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {	
-				int response = JOptionPane.showConfirmDialog(null, "Todos os dados ser„o apagados.\n Deseja continuar?", "Confirm",
+				int response = JOptionPane.showConfirmDialog(null, "Todos os dados ser√£o apagados.\n Deseja continuar?", "Confirm",
 	                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 	            if (response == JOptionPane.YES_OPTION) {
 	              eraseData(frame);
